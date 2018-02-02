@@ -4,6 +4,8 @@ const expressHandlebars = require('express-handlebars');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
+const videoRoute = require('./routes/videos');
+
 const app = express();
 
 // View engine setup
@@ -17,9 +19,7 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/videos', (req, res) => {
-  res.status(201).send();
-});
+app.use('/', videoRoute);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
