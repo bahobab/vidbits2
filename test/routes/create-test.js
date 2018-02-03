@@ -9,7 +9,7 @@ const {
     disconnectDatabase
 } = require('../database-utilities')
 
-describe('POST', () => {
+describe('SERVER: POST', () => {
 
     beforeEach(connectDatabaseAndDropData);
     afterEach(disconnectDatabase);

@@ -1,11 +1,5 @@
 const {assert} = require('chai');
 
-const Video = require('../../models/video');
-const {
-    connectDatabaseAndDropData,
-    disconnectDatabase
-} = require('../database-utilities');
-
 describe('User Visit Landing page', () => {
 
     describe('first time visit', () => {
@@ -27,14 +21,13 @@ describe('User Visit Landing page', () => {
     });
 
     describe('if existing videos', () => {
-        it('display the videos', async () => {
+        it('display the videos', () => {
             // set up
             const video = {
                 title: 'My Kool Video',
                 description: 'Rare Lunar Eclipse'
             }
             // exercise
-            // const existVideo = await Video.create(video);
             browser.url('/videos/create');
             browser.setValue("#title-input", video.title);
             browser.setValue('#description-input', video.description);
