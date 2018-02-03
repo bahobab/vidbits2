@@ -73,6 +73,21 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             assert.equal(response.status, 400);
         });
 
+        it('will render create new video form', async () => {
+            // set up
+            const newVideo = {
+                title: '',
+                description: 'Rare Lunar Eclipse'
+            };
+            // exercise
+            const response = await request(app)
+                                    .post('/videos')
+                                    .type('form')
+                                    .send(newVideo);
+            // assert
+            assert.include(response.text, 'Create a Video');
+        });
+
 
     });
 });
