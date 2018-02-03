@@ -18,6 +18,15 @@ const parseTextFromHTML = (htmlAsString, selector) => {
     }
 };
 
+const findHTMLSelector = (htmlAsString, selector) => {
+    const selectedElement = jsdom(htmlAsString).querySelector(selector);
+    if (selectedElement !== null) {
+        return true;
+    } else {
+        throw new Error(`No selector ${selector} found in HTML string`);
+    }
+};
+
 describe('SERVER: VISIT LANDING PAGE', () => {
 
     beforeEach(connectDatabaseAndDropData);
@@ -85,7 +94,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                     .type('form')
                                     .send(newVideo);
             // assert
-            assert.include(response.text, 'Create a Video');
+            assert.equal(findHTMLSelector(response.text, '#title-input'), true);
         });
 
 
