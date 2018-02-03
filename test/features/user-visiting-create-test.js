@@ -12,7 +12,7 @@ describe('POST', () => {
                 description: 'Rare Lunar Eclipse'
             }
             // exercise
-            browser.url('/videos/create.html');
+            browser.url('/videos/create');
             browser.setValue('#title-input', newVideo.title);
             browser.setValue('#description-input', newVideo.description);
             browser.click('#submit-video');
