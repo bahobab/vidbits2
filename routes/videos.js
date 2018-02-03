@@ -5,7 +5,7 @@ const app = require('../app');
 
 router.get('/', async (req, res) => {
     const videos = await Video.find({})
-    res.render('index', {videos});
+    res.render('videos/index', {videos});
 });
 
 router.get('/videos/create', (req, res) => {
