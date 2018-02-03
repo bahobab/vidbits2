@@ -1,5 +1,10 @@
 const {assert} = require('chai');
-// const request = require('')
+
+const Video = require('../../models/video');
+const {
+    connectDatabaseAndDropData,
+    disconnectDatabase
+} = require('../database-utilities');
 
 describe('User Visit Landing page', () => {
 
@@ -10,12 +15,33 @@ describe('User Visit Landing page', () => {
             // assert
             assert.equal(browser.getText('#videos-container'), '');
         });
+    });
 
+    describe('from the landing page', () => {
         it('can navigate to create page', () => {
             // set up
             browser.url('/');
             browser.click('a[href="/videos/create"]');
             assert.include(browser.getText('body'), 'Save a video');
+        });
+    });
+
+    describe('if existing videos', () => {
+        it('display the videos', async () => {
+            // set up
+            const video = {
+                title: 'My Kool Video',
+                description: 'Rare Lunar Eclipse'
+            }
+            // exercise
+            // const existVideo = await Video.create(video);
+            browser.url('/videos/create');
+            browser.setValue("#title-input", video.title);
+            browser.setValue('#description-input', video.description);
+            browser.click('#submit-video');
+            browser.url('/');
+            // assert
+            assert.include(browser.getText('#videos-container'), video.title)
         });
     });
 }); 
