@@ -48,7 +48,7 @@ describe('POST', () => {
             // assert
             assert.equal(newVideo.title, createdVideo.title);
             assert.equal(newVideo.description, createdVideo.description);
-
         });
+
     });
 });
