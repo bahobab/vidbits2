@@ -39,4 +39,23 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         // assert
         assert.include(parseTextFromHTML(response.text, '#videos-container'), newVideo.title)
     });
+
+    describe('Post video with empty title', () => {
+        it('will not save video', async () => {
+            // set up
+            const newVideo = {
+                title: '',
+                description: 'Rare Lunar Eclipse'
+            };
+            // exercise
+            const response = await request(app)
+                                    .post('/videos')
+                                    .type('form')
+                                    .send(newVideo);
+
+            const videos = await Video.find({});
+            // assert
+            assert.equal(videos.length, 0);
+        });
+    });
 });
