@@ -57,5 +57,22 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // assert
             assert.equal(videos.length, 0);
         });
+
+        it('will return 400 status code', async () => {
+            // set up
+            const newVideo = {
+                title: '',
+                description: 'Rare Lunar Eclipse'
+            };
+            // exercise
+            const response = await request(app)
+                                    .post('/videos')
+                                    .type('form')
+                                    .send(newVideo);
+            // assert
+            assert.equal(response.status, 400);
+        });
+
+
     });
 });
