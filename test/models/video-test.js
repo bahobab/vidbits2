@@ -3,23 +3,28 @@ const {mongoose, databaseUrl, options} = require('../../database');
 
 const Video = require('../../models/video');
 
-async function connectDatabase() {
-  await mongoose.connect(databaseUrl, options);
-  await mongoose.connection.db.dropDatabase();
-}
+const {
+  connectDatabaseAndDropData,
+  disconnectDatabase
+} = require('../database-utilities');
 
-async function disconnectDatabase() {
-  await mongoose.disconnect();
-}
+// async function connectDatabase() {
+//   await mongoose.connect(databaseUrl, options);
+//   await mongoose.connection.db.dropDatabase();
+// }
 
-module.exports = {
-  connectDatabase,
-  disconnectDatabase,
-}
+// async function disconnectDatabase() {
+//   await mongoose.disconnect();
+// }
+
+// module.exports = {
+//   connectDatabase,
+//   disconnectDatabase,
+// }
 
 describe('MODEL', () => {
 
-  beforeEach(connectDatabase);
+  beforeEach(connectDatabaseAndDropData);
   afterEach(disconnectDatabase);
 
   it('video title is a string', async () => {
