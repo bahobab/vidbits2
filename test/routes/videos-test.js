@@ -97,6 +97,21 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             assert.equal(findHTMLSelector(response.text, '#title-input'), true);
         });
 
+        it('will render a validation error message', async () => {
+            // set up
+            const newVideo = {
+                title: '',
+                description: 'Rare Lunar Eclipse'
+            };
+            // exercise
+            const response = await request(app)
+                                    .post('/videos')
+                                    .type('form')
+                                    .send(newVideo);
+            // assert
+            assert.include(parseTextFromHTML(response.text, '#title-validation-error'), 'Title is required');
+        });
+
 
     });
 });
