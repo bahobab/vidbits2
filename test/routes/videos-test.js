@@ -9,23 +9,10 @@ const {
     disconnectDatabase
 } = require('../database-utilities');
 
-const parseTextFromHTML = (htmlAsString, selector) => {
-    const selectedElement = jsdom(htmlAsString).querySelector(selector);
-    if (selectedElement !== null) {
-        return selectedElement.textContent;
-    } else {
-        throw new Error(`No element with ${selector} found in HTML string`);
-    }
-};
-
-const findHTMLSelector = (htmlAsString, selector) => {
-    const selectedElement = jsdom(htmlAsString).querySelector(selector);
-    if (selectedElement !== null) {
-        return true;
-    } else {
-        throw new Error(`No selector ${selector} found in HTML string`);
-    }
-};
+const {
+    parseTextFromHTML,
+    findHTMLSelector
+} = require('../test-utils');
 
 describe('SERVER: VISIT LANDING PAGE', () => {
 
