@@ -16,18 +16,19 @@ router.get('/videos/:videoid', async (req, res) => {
     let videoId = req.params.videoid;
     videoId = videoId.slice(1); // hmmm why it includes the :
     const video = await Video.find({_id:videoId});
-    const vid = video[0]; // video is an array!!!
-    const htmlStr = `<p>${vid.title}</p><p>${vid.description}</p>`
+    const {title, description} = video[0]; // video is an array!!!
+    // const htmlStr = `<p>${vid.title}</p><p>${vid.description}</p>`
     //res.send(htmlStr); // Because i cannot render the view??
-    res.render('videos/show', {vid});
+    res.render('videos/show', {title, description}); // needed to destructure {video} won't render
 });
 
 router.post('/videos', async (req, res) => {
-    const {title, description} = req.body;
+    let {title, description} = req.body;
     const video = await new Video({title, description});
     if (title) {
         await video.save();
-        res.status(201).render('videos/show', {video});
+        let {title, description} = video;
+        res.status(201).render('videos/show', {title, description});
     } else {
         res.status(400).render('videos/create', {video});
     }
