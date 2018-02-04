@@ -15,7 +15,7 @@ describe('SERVER: POST', () => {
     afterEach(disconnectDatabase);
 
     describe('fill out and submit form', () => {
-        it('return 201 status code', async () => {
+        it('return 302 status code', async () => {
             // set up
             const newVideo = {
                 title: 'My Kool Video',
@@ -27,7 +27,7 @@ describe('SERVER: POST', () => {
                                     .type('form')
                                     .send(newVideo);
             // assert
-            assert.equal(response.status, 201);
+            assert.equal(response.status, 302);
         });
     });
 
