@@ -112,6 +112,19 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             assert.include(parseTextFromHTML(response.text, '#title-validation-error'), 'Title is required');
         });
 
-
+        it('will preserve the description field value', async () => {
+            // set up
+            const newVideo = {
+                title: '',
+                description: 'Rare Lunar Eclipse'
+            };
+            // exercise
+            const response = await request(app)
+                                    .post('/videos')
+                                    .type('form')
+                                    .send(newVideo);
+            // assert
+            assert.equal(parseTextFromHTML(response.text, '#description-input'), newVideo.description);
+        });
     });
 });

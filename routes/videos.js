@@ -14,11 +14,12 @@ router.get('/videos/create', (req, res) => {
 
 router.post('/videos', async (req, res) => {
     const {title, description} = req.body;
+    const video = await new Video({title, description});
     if (title) {
-        const video = await Video.create({title, description});
+        await video.save();
         res.status(201).render('videos/show', {video});
     } else {
-        res.status(400).render('videos/create', {showValidationError: true});
+        res.status(400).render('videos/create', {video});
     }
     
 });
