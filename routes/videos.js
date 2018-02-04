@@ -28,7 +28,7 @@ router.post('/videos', async (req, res) => {
     if (title) {
         await video.save();
         let {title, description} = video;
-        res.status(201).render('videos/show', {title, description});
+        res.status(302).render('videos/show', {title, description});
     } else {
         res.status(400).render('videos/create', {video});
     }
