@@ -18,7 +18,7 @@ router.post('/videos', async (req, res) => {
         const video = await Video.create({title, description});
         res.status(201).render('videos/show', {video});
     } else {
-        res.status(400).render('videos/create', {titleValidation: 'Title is required'});
+        res.status(400).render('videos/create', {showValidationError: true});
     }
     
 });
