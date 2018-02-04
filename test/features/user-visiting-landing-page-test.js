@@ -25,16 +25,19 @@ describe('User Visit Landing page', () => {
             // set up
             const video = {
                 title: 'My Kool Video',
-                description: 'Rare Lunar Eclipse'
+                description: 'Rare Lunar Eclipse',
+                videoUrl: 'https://youtu.be/oLEjOcMYWCY'
             }
             // exercise
             browser.url('/videos/create');
             browser.setValue("#title-input", video.title);
             browser.setValue('#description-input', video.description);
+            browser.setValue('#url-input', video.videoUrl);
             browser.click('#submit-video');
             browser.url('/');
             // assert
-            assert.include(browser.getText('#videos-container'), video.title)
+            assert.include(browser.getText('#videos-container'), video.title);
+            assert.include(browser.getText('.video-player'), video.videoUrl);
         });
     });
 }); 
