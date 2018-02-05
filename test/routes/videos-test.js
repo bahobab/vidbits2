@@ -36,7 +36,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         const savedVideo = await Video.findOne({});
         // assert
         assert.include(parseTextFromHTML(response.text, '#videos-container'), newVideo.title);
-        assert.equal(savedVideo.videoUrl, newVideo.videoUrl);
+        assert.include(savedVideo, newVideo);
     });
 
     describe('Post video with empty title', () => {
