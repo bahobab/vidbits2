@@ -6,6 +6,9 @@ const Video = mongoose.model(
     title: {
       type: String
     },
+    videoUrl: {
+      type: String
+    },
     description: {
       type: String
     }
