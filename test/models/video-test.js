@@ -9,7 +9,7 @@ const {
 } = require('../database-utilities');
 
 const {
-  seedVideoToDatabase
+  buildVideoObject
 } = require('../test-utils');
 
 describe('MODEL', () => {
@@ -30,9 +30,10 @@ describe('MODEL', () => {
 
   it('Video #url is a string', async () => {
     // set up
-    const newVideo = await seedVideoToDatabase({
+    const newVideo = await buildVideoObject({
                               videoUrl: 10
                             });
+    console.log('>>>> ', newVideo);
     // exercise
     const createdVideo = await Video.create(newVideo);
     // assert
