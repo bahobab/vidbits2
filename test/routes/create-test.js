@@ -37,6 +37,7 @@ describe('SERVER: POST', () => {
             // set up
             const newVideo = {
                 title: 'My Kool Video',
+                videoUrl: 'http://example.com',
                 description: 'Rare Lunar Eclipse'
             };
             // exercise
