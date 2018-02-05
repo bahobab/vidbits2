@@ -23,12 +23,12 @@ router.get('/videos/:videoid', async (req, res) => {
 });
 
 router.post('/videos', async (req, res) => {
-    let {title, description} = req.body;
-    const video = await new Video({title, description});
+    let {title, videoUrl, description} = req.body;
+    const video = await new Video({title, videoUrl, description});
     if (title) {
         await video.save();
-        let {title, description} = video;
-        res.status(302).render('videos/show', {title, description});
+        let {title, videoUrl, description} = video;
+        res.status(302).render('videos/show', {title, videoUrl, description});
     } else {
         res.status(400).render('videos/create', {video});
     }
