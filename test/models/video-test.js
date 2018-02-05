@@ -33,7 +33,6 @@ describe('MODEL', () => {
     const newVideo = await buildVideoObject({
                               videoUrl: 10
                             });
-    console.log('>>>> ', newVideo);
     // exercise
     const createdVideo = await Video.create(newVideo);
     // assert

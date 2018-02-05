@@ -23,7 +23,7 @@ const buildVideoObject = (options = {}) => {
     const title = options.title || 'My Kool Video';
     const videoUrl = options.videoUrl || 'https://youtu.be/oLEjOcMYWCY';
     const description = options.description || 'Rare Lunar Eclipse';
-    return {title, description};
+    return {title, videoUrl, description};
 }
 
 const seedVideoToDatabase = async (options = {}) => {
