@@ -23,6 +23,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         // set up
         const newVideo = {
             title: 'My Kool Video',
+            videoUrl: 'https://youtu.be/oLEjOcMYWCY',
             description: 'Rare Lunar Eclipse'
         }
         // exercise
@@ -32,8 +33,10 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                 .send(newVideo);
 
         response = await request(app).get('/');
+        const savedVideo = await Video.findOne({});
         // assert
-        assert.include(parseTextFromHTML(response.text, '#videos-container'), newVideo.title)
+        assert.include(parseTextFromHTML(response.text, '#videos-container'), newVideo.title);
+        assert.equal(savedVideo.videoUrl, newVideo.videoUrl);
     });
 
     describe('Post video with empty title', () => {
