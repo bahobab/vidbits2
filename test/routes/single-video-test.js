@@ -25,7 +25,7 @@ describe('Server path: /videos/:videoid', () =>{
             const video = await seedVideoToDatabase();
             // exercise
             const response = await request(app)
-                                    .get(`/videos/:${video._id}`);
+                                    .get(`/videos/${video._id}`);
             // assert
             assert.include(parseTextFromHTML(response.text, '#video-title'), video.title);
         } );

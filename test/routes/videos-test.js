@@ -119,4 +119,24 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             assert.equal(parseTextFromHTML(response.text, '#description-input'), newVideo.description);
         });
     });
+
+    describe('GET /videos/:videoid', () => {
+        it('navigate to video with videoid', async () => {
+            // set up
+            const video = await Video.create({
+                title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
+                description: 'Rare Lunar Eclipse'
+            });
+            
+            // exercise
+            const visitedVideo = await Video.findOne();
+            const response = await request(app)
+                            .get(`/videos/${visitedVideo.id}`);
+            // assert
+            const repText = response.text
+            // console.log(`>>>  ${repText}`);                        
+            assert.include(repText, visitedVideo.title);
+        });
+    });
 });

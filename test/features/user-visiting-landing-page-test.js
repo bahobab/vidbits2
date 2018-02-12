@@ -62,7 +62,7 @@ describe('User Visit Landing page', () => {
             browser.click('#submit-video');
             // back to landing page
             browser.url('/');
-            browser.click(`a[href="/videos/${video.videoUrl}"]`);
+            browser.click('.video-title a');
             // assert
             assert.include(browser.getText('body'), video.title);
             assert.include(browser.getText('body'), video.description);
