@@ -11,8 +11,14 @@ const {
 
 const {
     parseTextFromHTML,
-    findHTMLSelector
+    parseHTML,
+    findHTMLSelector,
+    buildVideoObject
 } = require('../test-utils');
+
+const generateRandomUrl = (domain) => {
+    return `http://${domain}/${Math.random()}`
+};
 
 describe('SERVER: VISIT LANDING PAGE', () => {
 
@@ -21,22 +27,16 @@ describe('SERVER: VISIT LANDING PAGE', () => {
 
     it('display existing videos', async () => {
         // set up
-        const newVideo = {
+        const newVideo = await Video.create({
             title: 'My Kool Video',
-            videoUrl: 'https://youtu.be/oLEjOcMYWCY',
+            videoUrl: generateRandomUrl('mydomain'),
             description: 'Rare Lunar Eclipse'
-        }
+        });
         // exercise
-        let response = await request(app)
-                                .post('/videos')
-                                .type('form')
-                                .send(newVideo);
-
         response = await request(app).get('/');
-        const savedVideo = await Video.findOne({});
         // assert
         assert.include(parseTextFromHTML(response.text, '#videos-container'), newVideo.title);
-        assert.include(savedVideo, newVideo);
+        assert.equal(parseHTML(response.text, 'iframe').src, newVideo.videoUrl);
     });
 
     describe('Post video with empty title', () => {
@@ -106,8 +106,10 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // set up
             const newVideo = {
                 title: '',
+                videoUrl: 'https://youtu.be/oLEjOcMYWCY',
                 description: 'Rare Lunar Eclipse'
             };
+            // const createdVideo = await Video.create(buildVideoObject());
             // exercise
             const response = await request(app)
                                     .post('/videos')
@@ -115,6 +117,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                     .send(newVideo);
             // assert
             assert.equal(parseTextFromHTML(response.text, '#description-input'), newVideo.description);
+            // assert.include(parseTextFromHTML(response.text, 'iframe').src, newVideo.videoUrl);
         });
     });
 });

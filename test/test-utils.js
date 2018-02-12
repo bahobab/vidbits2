@@ -10,6 +10,10 @@ const parseTextFromHTML = (htmlAsString, selector) => {
     }
 };
 
+const parseHTML = (htmlAsString, selector) => {
+    return jsdom(htmlAsString).querySelector(selector)
+}
+
 const findHTMLSelector = (htmlAsString, selector) => {
     const selectedElement = jsdom(htmlAsString).querySelector(selector);
     if (selectedElement !== null) {
@@ -34,6 +38,7 @@ const seedVideoToDatabase = async (options = {}) => {
 
 module.exports = {
     parseTextFromHTML,
+    parseHTML,
     findHTMLSelector,
     buildVideoObject,
     seedVideoToDatabase

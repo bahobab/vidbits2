@@ -1,5 +1,9 @@
 const {assert} = require('chai');
 
+const generateRandomUrl = (domain) => {
+    return `http://${domain}/${Math.random()}`
+}
+
 describe('User Visit Landing page', () => {
 
     describe('first time visit', () => {
@@ -26,7 +30,7 @@ describe('User Visit Landing page', () => {
             const video = {
                 title: 'My Kool Video',
                 description: 'Rare Lunar Eclipse',
-                videoUrl: 'https://youtu.be/oLEjOcMYWCY'
+                videoUrl: generateRandomUrl('mydomain')
             }
             // exercise
             browser.url('/videos/create');
@@ -34,10 +38,10 @@ describe('User Visit Landing page', () => {
             browser.setValue('#description-input', video.description);
             browser.setValue('#url-input', video.videoUrl);
             browser.click('#submit-video');
+            // browser.waitforTimeout = 3000;
             browser.url('/');
             // assert
             assert.include(browser.getText('#videos-container'), video.title);
-            assert.include(browser.getText('.video-player'), video.videoUrl);
         });
     });
 }); 
