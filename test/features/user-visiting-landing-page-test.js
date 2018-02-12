@@ -1,5 +1,7 @@
 const {assert} = require('chai');
 
+const {fillForm} = require('./formUtil');
+
 const generateRandomUrl = (domain) => {
     return `http://${domain}/${Math.random()}`
 }
@@ -56,10 +58,7 @@ describe('User Visit Landing page', () => {
             // exercise
             // first, create a video to work with
             browser.url('/videos/create');
-            browser.setValue("#title-input", video.title);
-            browser.setValue('#description-input', video.description);
-            browser.setValue('#url-input', video.videoUrl);
-            browser.click('#submit-video');
+            fillForm(browser, video.title, video.videoUrl, video.description);
             // back to landing page
             browser.url('/');
             browser.click('.video-title a');
