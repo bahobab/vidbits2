@@ -117,7 +117,6 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                     .send(newVideo);
             // assert
             assert.equal(parseTextFromHTML(response.text, '#description-input'), newVideo.description);
-            // assert.include(parseTextFromHTML(response.text, 'iframe').src, newVideo.videoUrl);
         });
     });
 });
