@@ -135,8 +135,9 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                             .get(`/videos/${visitedVideo.id}`);
             // assert
             const repText = response.text
+
             assert.include(repText, visitedVideo.title);
-            assert.include(findHTMLSelector(response.text, 'iframe').src, visitedVideo.videoUrl);
+            assert.include(parseHTML(repText, 'iframe').src, visitedVideo.videoUrl);
         });
     });
 });
