@@ -36,10 +36,11 @@ describe('User Visit Landing page', () => {
             }
             // exercise
             browser.url('/videos/create');
-            browser.setValue("#title-input", video.title);
-            browser.setValue('#description-input', video.description);
-            browser.setValue('#url-input', video.videoUrl);
-            browser.click('#submit-video');
+            // browser.setValue("#title-input", video.title);
+            // browser.setValue('#description-input', video.description);
+            // browser.setValue('#url-input', video.videoUrl);
+            // browser.click('#submit-video');
+            fillForm(browser, video.title, video.videoUrl, video.description);
             // browser.waitforTimeout = 3000;
             browser.url('/');
             // assert
@@ -48,7 +49,7 @@ describe('User Visit Landing page', () => {
     });
 
     describe('with an existing video', () => {
-        it('can navigate to a video', async () => {
+        it('can navigate to a video', () => {
             // set up
             const video = {
                 title: 'My Kool Video',

@@ -44,6 +44,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // set up
             const newVideo = {
                 title: '',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // exercise
@@ -61,6 +62,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // set up
             const newVideo = {
                 title: '',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // exercise
@@ -76,6 +78,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // set up
             const newVideo = {
                 title: '',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // exercise
@@ -91,6 +94,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // set up
             const newVideo = {
                 title: '',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // exercise
@@ -106,7 +110,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // set up
             const newVideo = {
                 title: '',
-                videoUrl: 'https://youtu.be/oLEjOcMYWCY',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // const createdVideo = await Video.create(buildVideoObject());
@@ -123,7 +127,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // set up
             const newVideo = {
                 title: '',
-                videoUrl: 'https://youtu.be/oLEjOcMYWCY',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // exercise
@@ -136,24 +140,24 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         });
     });
 
-    describe('POST /videos with empty url', () => {
-        it('shows a url validation error', async () => {
-            // set up
-            const newVideo = {
-                title: 'My Kool video',
-                videoUrl: '',
-                description: 'Rare Lunar Eclipse'
-            };
-            // exercise
-            const response = await request(app)
-                                    .post('/videos')
-                                    .type('form')
-                                    .send(newVideo);
+    // describe('POST /videos with empty url', () => {
+    //     it('shows a url validation error', async () => {
+    //         // set up
+    //         const newVideo = {
+    //             title: 'My Kool video',
+    //             videoUrl: '',
+    //             description: 'Rare Lunar Eclipse'
+    //         };
+    //         // exercise
+    //         const response = await request(app)
+    //                                 .post('/videos')
+    //                                 .type('form')
+    //                                 .send(newVideo);
             
-            // assert
-            assert.include(parseTextFromHTML(response.text, '#url-validation-error'), 'Video url is required');
-        });
-    });
+    //         // assert
+    //         assert.include(parseTextFromHTML(response.text, '#url-validation-error'), 'Video url is required');
+    //     });
+    // });
 
     describe('GET /videos/:videoid', () => {
         it('navigate to video with videoid', async () => {

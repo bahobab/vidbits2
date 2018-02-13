@@ -12,6 +12,10 @@ const parseTextFromHTML = (htmlAsString, selector) => {
     }
 };
 
+const generateRandomUrl = (domain) => {
+    return `http://${domain}/${Math.random()}`
+}
+
 describe('POST', () => {
 
     describe('fill out submit a form', async () => {
@@ -19,11 +23,13 @@ describe('POST', () => {
             // set up
             const newVideo = {
                 title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             }
             // exercise
             browser.url('/videos/create');
             browser.setValue('#title-input', newVideo.title);
+            browser.setValue('#url-input', newVideo.videoUrl);
             browser.setValue('#description-input', newVideo.description);
             browser.click('#submit-video');
             // browser.url('/');

@@ -7,7 +7,11 @@ const Video = require('../../models/video');
 const {
     connectDatabaseAndDropData,
     disconnectDatabase
-} = require('../database-utilities')
+} = require('../database-utilities');
+
+const generateRandomUrl = (domain) => {
+    return `http://${domain}/${Math.random()}`
+};
 
 describe('SERVER: POST', () => {
 
@@ -19,6 +23,7 @@ describe('SERVER: POST', () => {
             // set up
             const newVideo = {
                 title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // exercise
@@ -37,6 +42,7 @@ describe('SERVER: POST', () => {
             // set up
             const newVideo = {
                 title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             };
             // exercise

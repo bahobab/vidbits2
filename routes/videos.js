@@ -23,14 +23,13 @@ router.post('/videos', async (req, res) => {
     let {title, videoUrl, description} = req.body;
     const video = await new Video({title, videoUrl, description});
     video.validateSync();
-    if (video.errors) {
+    if (video.errors || !video.videoUrl) {
         res.status(400).render('videos/create', {video});
     } else {
         await video.save();
         let {id, title, videoUrl, description} = video;
         res.status(302).render('videos/show', {id, title, videoUrl, description});
     }
-    
 });
 
 module.exports = router;
