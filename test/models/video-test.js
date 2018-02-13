@@ -55,4 +55,17 @@ describe('MODEL', () => {
     // assert
     assert.strictEqual(createdVideo.videoUrl, newVideo.videoUrl.toString());
   });
+
+  it('Video #url is required', async () => {
+    // set up
+    const newVideo = {
+      description: 'My kool video',
+      videoUrl: ''
+    };
+    // exercise
+    const video = await new Video(newVideo);
+    video.validateSync();
+    // assert
+    assert.equal(video.errors.videUrl.message, 'Video url is required');
+  });
 });
