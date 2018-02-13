@@ -136,6 +136,24 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         });
     });
 
+    describe('POST /videos with empty url', () => {
+        it('shows a url validation error', async () => {
+            // set up
+            const newVideo = {
+                title: 'My Kool video',
+                videoUrl: '',
+                description: 'Rare Lunar Eclipse'
+            };
+            // exercise
+            const response = await request(app)
+                                    .post('/videos')
+                                    .type('form')
+                                    .send(newVideo);
+            // assert
+            assert.include(parseTextFromHTML(response.text, '#url-validation-error'), 'Video url is required');
+        });
+    });
+
     describe('GET /videos/:videoid', () => {
         it('navigate to video with videoid', async () => {
             // set up
