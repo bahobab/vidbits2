@@ -1,7 +1,6 @@
 {{#unless video.title}}
     <p id='title-validation-error'>Title is required</p>
 {{/unless}}
-{{video.description}}
 <form action="/videos" method="POST">
     <input value="{{video.title}}" type="text" name="title" id="title-input" placeholder="Title">
     <input id="url-input" name="url" value="{{video.videoUrl}}" type="text">

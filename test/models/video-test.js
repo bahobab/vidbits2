@@ -28,6 +28,17 @@ describe('MODEL', () => {
     assert.strictEqual(createdVideo.title, newVideo.title.toString());
   });
 
+  it('video title cannot be empty (required)', async () => {
+    // set up
+    const newVideo = {
+      description: 'My kool video'
+    }
+    const video = await new Video(newVideo);
+    // exercise    
+    video.validateSync();
+    assert(video.errors.title.message, 'Title is required');
+  });
+
   it('Video #url is a string', async () => {
     // set up
     const newVideo = await buildVideoObject({

@@ -4,7 +4,7 @@ const Video = mongoose.model(
   'Video',
   mongoose.Schema({
     title: {
-      type: String
+      type: String,
     },
     videoUrl: {
       type: String

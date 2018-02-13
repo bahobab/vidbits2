@@ -22,6 +22,7 @@ router.get('/videos/:videoid', async (req, res) => {
 router.post('/videos', async (req, res) => {
     let {title, videoUrl, description} = req.body;
     const video = await new Video({title, videoUrl, description});
+    video.validateSync();
     if (title) {
         await video.save();
         let {id, title, videoUrl, description} = video;
