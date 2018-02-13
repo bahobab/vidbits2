@@ -132,7 +132,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                     .type('form')
                                     .send(newVideo);
             // assert
-            assert.equal(parseTextFromHTML(response.text, '#url-input'), newVideo.videoUrl);
+            assert.equal(parseHTML(response.text, '#url-input').value, newVideo.videoUrl);
         });
     });
 
