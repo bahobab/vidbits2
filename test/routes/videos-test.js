@@ -118,6 +118,22 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // assert
             assert.equal(parseTextFromHTML(response.text, '#description-input'), newVideo.description);
         });
+
+        it('will preserve the video url field', async () => {
+            // set up
+            const newVideo = {
+                title: '',
+                videoUrl: 'https://youtu.be/oLEjOcMYWCY',
+                description: 'Rare Lunar Eclipse'
+            };
+            // exercise
+            const response = await request(app)
+                                    .post('/videos')
+                                    .type('form')
+                                    .send(newVideo);
+            // assert
+            assert.equal(parseTextFromHTML(response.text, '#url-input'), newVideo.videoUrl);
+        });
     });
 
     describe('GET /videos/:videoid', () => {
