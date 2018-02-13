@@ -66,6 +66,6 @@ describe('MODEL', () => {
     const video = await new Video(newVideo);
     video.validateSync();
     // assert
-    assert.equal(video.errors.videUrl.message, 'Video url is required');
+    assert.equal(video.errors.videoUrl.message, 'Video url is required');
   });
 });
