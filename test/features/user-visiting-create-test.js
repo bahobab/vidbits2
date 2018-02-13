@@ -3,6 +3,8 @@ const {jsdom} = require('jsdom');
 // const request = require('supertest');
 // const app = require('../../app');
 
+const {fillForm} = require('./formUtil');
+
 const parseTextFromHTML = (htmlAsString, selector) => {
     const selectedElement = jsdom(htmlAsString).querySelector(selector);
     if (selectedElement !== null) {
@@ -28,11 +30,7 @@ describe('POST', () => {
             }
             // exercise
             browser.url('/videos/create');
-            browser.setValue('#title-input', newVideo.title);
-            browser.setValue('#url-input', newVideo.videoUrl);
-            browser.setValue('#description-input', newVideo.description);
-            browser.click('#submit-video');
-            // browser.url('/');
+            fillForm(browser, newVideo.title, newVideo.videoUrl, newVideo.description);
             // assert
             assert.include(browser.getText('body'), newVideo.title);
             assert.include(browser.getText('body'), newVideo.description);

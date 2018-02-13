@@ -36,12 +36,7 @@ describe('User Visit Landing page', () => {
             }
             // exercise
             browser.url('/videos/create');
-            // browser.setValue("#title-input", video.title);
-            // browser.setValue('#description-input', video.description);
-            // browser.setValue('#url-input', video.videoUrl);
-            // browser.click('#submit-video');
             fillForm(browser, video.title, video.videoUrl, video.description);
-            // browser.waitforTimeout = 3000;
             browser.url('/');
             // assert
             assert.include(browser.getText('#videos-container'), video.title);
