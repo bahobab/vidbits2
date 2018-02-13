@@ -8,7 +8,8 @@ const Video = mongoose.model(
       required: [true, 'Title is required']
     },
     videoUrl: {
-      type: String
+      type: String,
+      required: [true, 'Video url is required']
     },
     description: {
       type: String
