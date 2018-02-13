@@ -149,6 +149,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                     .post('/videos')
                                     .type('form')
                                     .send(newVideo);
+            
             // assert
             assert.include(parseTextFromHTML(response.text, '#url-validation-error'), 'Video url is required');
         });
