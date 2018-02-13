@@ -23,7 +23,7 @@ router.post('/videos', async (req, res) => {
     let {title, videoUrl, description} = req.body;
     const video = await new Video({title, videoUrl, description});
     video.validateSync();
-    if (video.errors || !video.videoUrl) {
+    if (video.errors) {
         res.status(400).render('videos/create', {video});
     } else {
         await video.save();
