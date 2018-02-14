@@ -25,9 +25,9 @@ describe('Updating video', () => {
         // new video title
         const newTitle = 'My Very Kool Video';
         // fill out form/submit
-        fillForm(browser, newTitle, browser.getText('iframe').src, browser.getText('#video-description'));
+        fillForm(browser, newTitle, browser.getAttribute('#title-input', 'value'), browser.getText('#description-input'));
         // redirected back to /videos/show (5)
-        
+
         // assert
         assert.include(browser.getText('body'), newTitle);
 

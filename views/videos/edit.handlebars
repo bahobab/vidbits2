@@ -1,0 +1,6 @@
+<form action="/videos" method="POST">
+    <input value="{{video.title}}" type="text" name="title" id="title-input" placeholder="Title">
+    <input id="url-input" name="videoUrl" value="{{video.videoUrl}}" type="text" placeholder="Video url">
+    <textarea type="text" name="description" id="description-input" placeholder="Description">{{video.description}}</textarea>
+    <P><button type="submit" id="update-video">Update a video</button></P>
+</form>
