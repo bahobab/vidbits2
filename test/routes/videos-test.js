@@ -140,6 +140,25 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         });
     });
 
+    describe('POST /videos/:id/update', () => {
+        it('update video record', async () => {
+            // set up
+            const newTitle = 'My Very Very Kool Video';
+            // exercise
+            const oldVideo = await new Video({
+                title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
+                description: 'Rare Lunar Eclipse'
+            });
+            const response = await request(app)
+                                    .post(`/videos/${oldVideo.id}/updates`)
+                                    .type('form')
+                                    .send(newTitle)
+            // assert
+            assert.notEqual(parseHTML(response.text, '#title-input').value, newTitle);
+        });
+    });
+
     // describe('POST /videos with empty url', () => {
     //     it('shows a url validation error', async () => {
     //         // set up
