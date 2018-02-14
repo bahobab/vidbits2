@@ -195,9 +195,10 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                     .get(`/videos/${videoid}/edit`);
             
             // assert
-            assert.include(parseHTML(response.text, '#title-input').value, videoToUpdate.title);
-            assert.include(parseHTML(response.text, '#url-input').value, videoToUpdate.videoUrl);
-            assert.include(parseHTML(response.text, '#description'), videoToUpdate.description);
+            const resp = response.text;
+            assert.include(parseHTML(resp, '#title-input').value, videoToUpdate.title);
+            assert.include(parseHTML(resp, '#url-input').value, videoToUpdate.videoUrl);
+            assert.include(parseTextFromHTML(resp, '#description-input'), videoToUpdate.description);
         });
     });
 });
