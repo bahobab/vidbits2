@@ -19,6 +19,10 @@ router.get('/videos/:videoid', async (req, res) => {
     res.render('videos/show', {title, id, videoUrl, description}); // needed to destructure {video} won't render
 });
 
+router.get('/videos/:videoid/edit', async (req, res) => {
+    res.render('videos/create');
+});
+
 router.post('/videos', async (req, res) => {
     let {title, videoUrl, description} = req.body;
     const video = await new Video({title, videoUrl, description});

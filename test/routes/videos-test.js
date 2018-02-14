@@ -179,4 +179,25 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             assert.include(parseHTML(repText, 'iframe').src, visitedVideo.videoUrl);
         });
     });
+
+    describe('GET /vidoes/:videoid/edit', () => {
+        it('populate a form with valuess of existing video', async () => {
+            // set up
+            const video = await Video.create({
+                title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
+                description: 'Rare Lunar Eclipse'
+            });
+            // exercise
+            const videoToUpdate = await Video.findOne();
+            const videoid = videoToUpdate.id;
+            const response = await request(app)
+                                    .get(`/videos/${videoid}/edit`);
+            
+            // assert
+            assert.include(parseHTML(response.text, '#title-input').value, videoToUpdate.title);
+            assert.include(parseHTML(response.text, '#url-input').value, videoToUpdate.videoUrl);
+            assert.include(parseHTML(response.text, '#description'), videoToUpdate.description);
+        });
+    });
 });
