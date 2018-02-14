@@ -30,6 +30,9 @@ describe('Updating video', () => {
 
         // assert
         assert.include(browser.getText('body'), newTitle);
+    });
 
+    it('updating video does not create another video', () => {
+        
     });
 });
