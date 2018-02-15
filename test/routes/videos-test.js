@@ -150,6 +150,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                 videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             });
+
             const response = await request(app)
                                     .post(`/videos/${oldVideo.id}/updates`)
                                     .type('form')
@@ -157,12 +158,12 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             // assert
             // console.log('>>> ', response.text);
             assert.strictEqual(response.status, 302);
-            // assert.notInclude(parseHTML(response.text, '#video-title').value, newTitle);
+            assert.equal(response.header['location'], `/videos/${oldVideo.id}`);
         });
 
-        // it('redirect to show page', async () => {
+        // it('does not save invalid record', async () => {
         //     // set up
-        //     const newTitle = {title: 'My Very Very Kool Video'};
+        //     const newTitle = {title: ''};
         //     // exercise
         //     const oldVideo = await Video.create({
         //         title: 'My Kool Video',
@@ -174,10 +175,12 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         //                             .type('form')
         //                             .send(newTitle);
         //     // assert
-        //     assert.equal(response.status, 302);
+        //     // assert.equal(response.status, 302);
         //     assert.include(response.location, '/vidos/show');
         // });
     });
+
+    
 
     // describe('POST /videos with empty url', () => {
     //     it('shows a url validation error', async () => {
