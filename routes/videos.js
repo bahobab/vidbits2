@@ -41,7 +41,12 @@ router.post('/videos', async (req, res) => {
 router.post('/videos/:videoid/updates', async (req, res) => {
     const oldVideo = await Video.findOne({_id: req.params.videoid});
     oldVideo.title = req.body.title;
-    res.render('videos/edit', {oldVideo});   
+    // save updated video first
+    const newVideo = await oldVideo.save();
+    // redirect to show
+    res.redirect(`/videos/${newVideo.id}`);
+    // res.status(302).render('videos/show', {oldVideo});
+    // res.render('videos/edit', {oldVideo});  
 });
 
 module.exports = router;

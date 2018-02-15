@@ -30,7 +30,7 @@ describe('Updating video', () => {
 
         // assert
         // console.log('>>>>> ', browser.getText);
-        assert.include(browser.getText('body'), 'Update a video');
+        assert.include(browser.getText('body'), newTitle);
     });
 
     it('updating video does not create another video', async () => {
@@ -54,6 +54,6 @@ describe('Updating video', () => {
         // redirected back to /videos/show (5)
 
         // assert
-        assert.notInclude(browser.getAttribute('#title-input', 'value'), newVideo.title);
+        assert.notInclude(browser.getText('#video-title'), newVideo.title);
     });
 });
