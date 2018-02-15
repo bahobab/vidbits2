@@ -29,10 +29,11 @@ describe('Updating video', () => {
         // redirected back to /videos/show (5)
 
         // assert
-        assert.include(browser.getText('body'), newTitle);
+        // console.log('>>>>> ', browser.getText);
+        assert.include(browser.getText('body'), 'Update a video');
     });
 
     it('updating video does not create another video', () => {
-        
+
     });
 });

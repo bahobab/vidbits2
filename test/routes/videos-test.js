@@ -143,9 +143,9 @@ describe('SERVER: VISIT LANDING PAGE', () => {
     describe('POST /videos/:id/update', () => {
         it('update video record', async () => {
             // set up
-            const newTitle = 'My Very Very Kool Video';
+            const newTitle = {title: 'My Very Very Kool Video'};
             // exercise
-            const oldVideo = await new Video({
+            const oldVideo = await Video.create({
                 title: 'My Kool Video',
                 videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'

@@ -22,7 +22,7 @@ router.get('/videos/:videoid', async (req, res) => {
 router.get('/videos/:videoid/edit', async (req, res) => {
     const video = await Video.findOne({_id: req.params.videoid})
     // console.log(`>>>> ${typeof(video)}`);
-    res.render('videos/create', {video});
+    res.render('videos/edit', {video});
 });
 
 router.post('/videos', async (req, res) => {
@@ -36,6 +36,12 @@ router.post('/videos', async (req, res) => {
         let {id, title, videoUrl, description} = video;
         res.status(302).render('videos/show', {id, title, videoUrl, description});
     }
+});
+
+router.post('/videos/:videoid/updates', async (req, res) => {
+    const oldVideo = await Video.findOne({_id: req.params.videoid});
+    oldVideo.title = req.body.title;
+    res.render('videos/edit', {oldVideo});   
 });
 
 module.exports = router;
