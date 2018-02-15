@@ -161,23 +161,22 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             assert.equal(response.header['location'], `/videos/${oldVideo.id}`);
         });
 
-        // it('does not save invalid record', async () => {
-        //     // set up
-        //     const newTitle = {title: ''};
-        //     // exercise
-        //     const oldVideo = await Video.create({
-        //         title: 'My Kool Video',
-        //         videoUrl: generateRandomUrl('mydomain'),
-        //         description: 'Rare Lunar Eclipse'
-        //     });
-        //     const response = await request(app)
-        //                             .post(`/videos/${oldVideo.id}/updates`)
-        //                             .type('form')
-        //                             .send(newTitle);
-        //     // assert
-        //     // assert.equal(response.status, 302);
-        //     assert.include(response.location, '/vidos/show');
-        // });
+        it('does not save invalid record', async () => {
+            // set up
+            const newTitle = {title: ''};
+            // exercise
+            const oldVideo = await Video.create({
+                title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
+                description: 'Rare Lunar Eclipse'
+            });
+            const response = await request(app)
+                                    .post(`/videos/${oldVideo.id}/updates`)
+                                    .type('form')
+                                    .send(newTitle);
+            // assert
+            assert.include(response.text('body'), 'Update a video');
+        });
     });
 
     
