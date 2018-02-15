@@ -175,7 +175,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
                                     .type('form')
                                     .send(newTitle);
             // assert
-            assert.include(response.text('body'), 'Update a video');
+            assert.equal(parseHTML(response.text, '#title-input').value, oldVideo.title);
         });
     });
 

@@ -39,14 +39,21 @@ router.post('/videos', async (req, res) => {
 });
 
 router.post('/videos/:videoid/updates', async (req, res) => {
-    const oldVideo = await Video.findOne({_id: req.params.videoid});
-    oldVideo.title = req.body.title;
-    // save updated video first
-    const newVideo = await oldVideo.save();
-    // redirect to show
-    res.redirect(`/videos/${newVideo.id}`);
-    // res.status(302).render('videos/show', {oldVideo});
-    // res.render('videos/edit', {oldVideo});  
+    var video = await Video.findOne({_id: req.params.videoid});
+    var oldTitle = video.title;       
+    video.title = req.body.title;
+    video.validateSync();
+    if (video.errors) {
+        video.title = oldTitle;
+        res.render('videos/edit', {video});
+    } else {
+        // save updated video first
+        await video.save();
+        // redirect to show
+        res.redirect(`/videos/${video.id}`);
+        // res.status(302).render('videos/show', {oldVideo});
+        // res.render('videos/edit', {oldVideo});
+    }  
 });
 
 module.exports = router;
