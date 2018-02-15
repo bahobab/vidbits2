@@ -38,10 +38,5 @@ router.post('/videos', async (req, res) => {
     }
 });
 
-router.post('/videos/:videoid/updates', async (req, res) => {
-    const oldVideo = await Video.findOne({_id: req.params.videoid});
-    oldVideo.title = req.body.title;
-    res.render('videos/edit', {oldVideo});   
-});
 
 module.exports = router;
