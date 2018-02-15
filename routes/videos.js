@@ -45,7 +45,8 @@ router.post('/videos/:videoid/updates', async (req, res) => {
     video.validateSync();
     if (video.errors) {
         video.title = oldTitle;
-        res.render('videos/edit', {video});
+        res.status(400)
+        .render('videos/edit', {video});
     } else {
         // save updated video first
         await video.save();
