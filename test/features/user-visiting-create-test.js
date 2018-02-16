@@ -36,20 +36,4 @@ describe('POST', () => {
             assert.include(browser.getText('body'), newVideo.description);
         });
     });
-
-    // describe('Video title is missing', () => {
-    //     it('will not be saved', () => {
-    //         // set up
-    //         const newVideo = {
-    //             title: 'My Kool Video',
-    //             description: 'Rare Lunar Eclipse'
-    //         };
-    //         // exercise
-    //         browser.url('/videos/create');
-    //         browser.setValue('#title-input', '');
-    //         browser.click('#submit-video');
-    //         // assert
-    //         assert.equal(browser.getText('body')), '');
-    //     });
-    // });
 });

@@ -33,7 +33,7 @@ describe('MODEL', () => {
     assert.strictEqual(createdVideo.title, newVideo.title.toString());
   });
 
-  it('video title cannot be empty (required)', async () => {
+  it('video title is required', async () => {
     // set up
     const newVideo = {
       description: 'My kool video',

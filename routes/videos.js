@@ -14,9 +14,9 @@ router.get('/videos/create', (req, res) => {
 
 router.get('/videos/:videoid', async (req, res) => {
     let videoId = req.params.videoid;
-    const video = await Video.find({_id:videoId});
-    const {title, id, videoUrl, description} = video[0]; // video is an array!!!
-    res.render('videos/show', {title, id, videoUrl, description}); // needed to destructure {video} won't render
+    const video = await Video.findOne({_id:videoId});
+    const {title, id, videoUrl, description} = video; // video is an array!!!
+    res.status(200).render('videos/show', {title, id, videoUrl, description}); // needed to destructure {video} won't render
 });
 
 router.get('/videos/:videoid/edit', async (req, res) => {
