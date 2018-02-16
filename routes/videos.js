@@ -40,16 +40,22 @@ router.post('/videos', async (req, res) => {
 
 router.post('/videos/:videoid/updates', async (req, res) => {
     var video = await Video.findOne({_id: req.params.videoid});
-    var oldTitle = video.title;       
+    var {id, title, videoUrl, description} = video;
     video.title = req.body.title;
+    video.videoUrl = req.body.videoUrl;
+    video.description = req.body.description;
     video.validateSync();
     if (video.errors) {
-        video.title = oldTitle;
+        // video.title = oldTitle;
+        video = {id, title, videoUrl, description};
+        
         res.status(400)
         .render('videos/edit', {video});
     } else {
         // save updated video first
         await video.save();
+        console.log('redirecting to Show Page >>>> ', video)
+        
         // redirect to show
         res.redirect(`/videos/${video.id}`);
         // res.status(302).render('videos/show', {oldVideo});

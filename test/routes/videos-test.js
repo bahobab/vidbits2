@@ -143,18 +143,30 @@ describe('SERVER: VISIT LANDING PAGE', () => {
     describe('POST /videos/:id/update', () => {
         it('update video record', async () => {
             // set up
-            const newTitle = {title: 'My Very Very Kool Video'};
+            // const newTitle = {title: 'My Very Very Kool Video'};
+            const newVideo = {title: 'My Very Very Kool Video',
+                                videoUrl: 'mydomain',
+                                description: 'description'
+                                };
             // exercise
             const oldVideo = await Video.create({
                 title: 'My Kool Video',
                 videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             });
+            // const newVideo = oldVideo;
+            //     newVideo.title = 'My Very Very Kool Video';
 
+            // const newVideo = {
+            //     title: 'My Very Very Kool Video',
+            //     videoUrl: oldVideo.videoUrl,
+            //     description: oldVideo.description
+            // }
+            // exercise
             const response = await request(app)
                                     .post(`/videos/${oldVideo.id}/updates`)
                                     .type('form')
-                                    .send(newTitle)
+                                    .send(newVideo)
             // assert
             // console.log('>>> ', response.text);
             assert.strictEqual(response.status, 302);
@@ -165,34 +177,60 @@ describe('SERVER: VISIT LANDING PAGE', () => {
 
             it('does not save invalid record', async () => {
                 // set up
-                const newTitle = {title: ''};
+                const newVideo = {title: '',
+                                videoUrl: 'mydomain',
+                                description: 'description'
+                                };
                 // exercise
                 const oldVideo = await Video.create({
                     title: 'My Kool Video',
                     videoUrl: generateRandomUrl('mydomain'),
                     description: 'Rare Lunar Eclipse'
                 });
+
+                // const newVideo = oldVideo;
+                // newVideo.title = '';
+
+                // const newVideo = {
+                //     title: '',
+                //     videoUrl: oldVideo.videoUrl,
+                //     description: oldVideo.description
+                // }
+                // exercise
                 const response = await request(app)
                                         .post(`/videos/${oldVideo.id}/updates`)
                                         .type('form')
-                                        .send(newTitle);
+                                        .send(newVideo);
                 // assert
                 assert.equal(parseHTML(response.text, '#title-input').value, oldVideo.title);
             });
 
             it('responds with 400 status code', async () => {
                 // set up
-                const newTitle = {title: ''};
-                // exercise
+                // const newTitle = {title: ''};
+                const newVideo = {title: '',
+                                videoUrl: 'mydomain',
+                                description: 'description'
+                                };
                 const oldVideo = await Video.create({
                     title: 'My Kool Video',
                     videoUrl: generateRandomUrl('mydomain'),
                     description: 'Rare Lunar Eclipse'
                 });
+
+                // const newVideo = oldVideo;
+                // newVideo.title = '';
+
+                // const newVideo = {
+                //     title: '',
+                //     videoUrl: oldVideo.videoUrl,
+                //     description: oldVideo.description
+                // }
+                // exercise                
                 const response = await request(app)
                                         .post(`/videos/${oldVideo.id}/updates`)
                                         .type('form')
-                                        .send(newTitle);
+                                        .send(newVideo);
                 // assert
                 assert.equal(response.status, 400);
             });
