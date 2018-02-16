@@ -55,4 +55,9 @@ router.post('/videos/:videoid/updates', async (req, res) => {
     }  
 });
 
+router.post('/videos/:videoid/deletions', async (req, res) => {
+    await Video.deleteOne({_id: req.params.videoid});
+    res.redirect('/');
+});
+
 module.exports = router;

@@ -305,17 +305,21 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         it('removes the video record', async () => {
             // set up
             const video = await Video.create({
-                title: 'My Kool Video',
+                title: 'My Great Video',
                 videoUrl: generateRandomUrl('mydomain'),
                 description: 'Rare Lunar Eclipse'
             });
             // exercise
-            const response = request(app)
-                                .post(`/videos/${video.id}/deletions`)
-                                .type('form')
-                                .send(video);
+            const response = await request(app)
+                                .post(`/videos/${video.id}/deletions`);
+                                // .type('form')
+                                // .send();
             // assert
-            assert.notInclude(parseTextFromHTML('#videos-container'), video.title);
+            // response.text redirected to '/'
+            const videos = await Video.find({});
+            assert.equal(videos.length, 0);
+            assert.equal(response.status, 302);
+            assert.equal(response.header['location'], '/');
         });
     });
 });

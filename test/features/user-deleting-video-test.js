@@ -1,4 +1,5 @@
-const {request} = require('chai');
+const {assert} = require('chai');
+
 
 const {fillForm} = require('./formUtil');
 const generateRandomUrl = (domain) => {
@@ -8,18 +9,23 @@ const generateRandomUrl = (domain) => {
 describe('user deleting a video', () => {
     it('removes video from the list', () => {
         // set up
-        const videoToDelete = {
+        const video = {
             title: 'My Great Video',
-            videoUrl: generateRandomUrl('mydomain')
+            videoUrl: generateRandomUrl('mydomain'),
+            description: 'This is really great!'
         };
-        const {title, url, description} = videoToDelete;
-        browser.url('/video/create');
-        fillForm(browser, {title, url, description});
+        browser.url('/videos/create');
+        fillForm(
+            browser,
+            video.title,
+            video.videoUrl,
+            video.description
+        );
         // exercise
-        browser.url('/videos/show');
+        // browser.url('/videos/show');
         browser.click('#delete');
         // assert
-        assert.notInclude(browser.getText('body'), title);
+        assert.notInclude(browser.getText('body'), video.title);
 
     });
 });

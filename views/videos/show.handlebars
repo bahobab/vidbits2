@@ -14,5 +14,7 @@
     </div>
   </div>
   <a id="edit-video" type="button" href="/videos/{{id}}/edit">Edit Video</a>
-  <a id="delete" href="/videos/{{id}}/deletions">Delete Video</a>
+  <form method="POST" action="/videos/{{id}}/deletions">
+    <button type="submit" id="delete">Delete Video</button>
+  </form>
 </div>
