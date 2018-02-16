@@ -300,4 +300,22 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             assert.include(parseTextFromHTML(resp, '#description-input'), videoToUpdate.description);
         });
     });
+
+    describe('POST /videos/:id/deletions', () => {
+        it('removes the video record', async () => {
+            // set up
+            const video = await Video.create({
+                title: 'My Kool Video',
+                videoUrl: generateRandomUrl('mydomain'),
+                description: 'Rare Lunar Eclipse'
+            });
+            // exercise
+            const response = request(app)
+                                .post(`/videos/${video.id}/deletions`)
+                                .type('form')
+                                .send(video);
+            // assert
+            assert.notInclude(parseTextFromHTML('#videos-container'), video.title);
+        });
+    });
 });
