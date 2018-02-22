@@ -206,7 +206,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         });
     });
 
-    describe('GET /videos/:videoid', () => {
+    describe('GET /videos/:videoId', () => {
         it('navigate to video with videoid', async () => {
             // set up
             const video = await Video.create({
@@ -226,7 +226,7 @@ describe('SERVER: VISIT LANDING PAGE', () => {
         });
     });
 
-    describe('GET /vidoes/:videoid/edit', () => {
+    describe('GET /vidoes/:videoId/edit', () => {
         it('populate a form with valuess of existing video', async () => {
             // set up
             const video = await Video.create({
@@ -236,9 +236,9 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             });
             // exercise
             const videoToUpdate = await Video.findOne();
-            const videoid = videoToUpdate.id;
+            const videoId = videoToUpdate.id;
             const response = await request(app)
-                                    .get(`/videos/${videoid}/edit`);
+                                    .get(`/videos/${videoId}/edit`);
             
             // assert
             const resp = response.text;
