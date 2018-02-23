@@ -21,6 +21,7 @@ describe('User Visit Landing page', () => {
         it('can navigate to create page', () => {
             // set up
             browser.url('/');
+            browser.url('/videos'); // redirect
             browser.click('a[href="/videos/create"]');
             assert.include(browser.getText('body'), 'Save a video');
         });
