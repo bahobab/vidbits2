@@ -3,7 +3,7 @@ const router = require('express').Router();
 const Video = require('../models/video');
 const app = require('../app');
 
-router.get('/', async (req, res) => {
+router.get('/videos', async (req, res) => {
     const videos = await Video.find({})
     res.render('videos/index', {videos});
 });
@@ -32,8 +32,9 @@ router.post('/videos', async (req, res) => {
         res.status(400).render('videos/create', {video});
     } else {
         await video.save();
-        let {id, title, videoUrl, description} = video;
-        res.status(302).render('videos/show', {id, title, videoUrl, description});
+        // let {id, title, videoUrl, description} = video;
+        // res.status(302).render('videos/show', {id, title, videoUrl, description});
+        res.redirect(`/videos/${video.id}`);
     }
 });
 

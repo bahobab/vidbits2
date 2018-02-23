@@ -33,8 +33,11 @@ describe('SERVER: VISIT LANDING PAGE', () => {
             description: 'Rare Lunar Eclipse'
         });
         // exercise
-        response = await request(app).get('/');
+        // await request(app).get('/');
+        const response = await request(app)
+                                .get('/videos');
         // assert
+        console.log('>>>>> :', response.text)
         assert.include(parseTextFromHTML(response.text, '#videos-container'), newVideo.title);
         assert.equal(parseHTML(response.text, 'iframe').src, newVideo.videoUrl);
     });
